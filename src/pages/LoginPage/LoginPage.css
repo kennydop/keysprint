@@ -1,0 +1,56 @@
+.login-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #cadcff;
+}
+
+.login-page .login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  justify-content: center;
+  align-items: center;
+  width: 400px;
+  padding: 20px;
+  background: white;
+  border-radius: 6px;
+  box-shadow: 20px 20px 40px rgba(60, 60, 150, 0.25);
+}
+
+.login-page .login-form .lp_header {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-page .login-form .lp_header h3 {
+  font-size: 2rem;
+  font-weight: 800;
+  color: #4958f8;
+}
+
+.login-page .login-form .lp_header p {
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.login-page .login-form .lp_header p > span {
+  cursor: pointer;
+}
+
+.lp_btns-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.form {
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}

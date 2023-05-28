@@ -1,0 +1,36 @@
+.main-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  gap: 4rem;
+}
+
+.headerText {
+  color: #4958f8;
+  padding: 10px;
+  margin-bottom: 10px;
+  font-size: 30px;
+  font-weight: 700;
+  justify-content: center;
+  align-items: center;
+}
+
+.lp_info {
+  font-weight: 700;
+}
+
+.lpr_container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 2rem;
+}
+
+.continue-btn {
+  justify-content: space-between;
+}
+
+.continue-btn > span {
+  text-decoration: none;
+}
