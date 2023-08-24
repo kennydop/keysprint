@@ -1,13 +1,7 @@
 import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
-import { getFirestore, doc, getDoc } from "firebase/firestore";
+import { getFirestore, doc, getDoc, updateDoc } from "firebase/firestore";
 
-import {
-  useContext,
-  useState,
-  useEffect,
-  createContext,
-  useCallback,
-} from "react";
+import { useContext, useState, useEffect, createContext } from "react";
 import LoginPage from "../pages/LoginPage/LoginPage";
 import LoadingIndicator from "../components/LoadingIndicator/LoadingIndicator";
 
@@ -50,8 +44,6 @@ export const UserProvider = ({ children }) => {
 
   const getProgress = async (user) => {
     const docRef = doc(db, "users", user.uid);
-    console.log("USER_UID:", user.uid);
-    console.log("DOCREF:", docRef);
     const docSnap = await getDoc(docRef);
 
     if (docSnap.exists()) {
@@ -60,6 +52,13 @@ export const UserProvider = ({ children }) => {
     } else {
       console.log("No such document!");
     }
+  };
+
+  const updateProgress = async (user, p) => {
+    const docRef = doc(db, "users", user.uid);
+    await updateDoc(docRef, p);
+    // update local progress
+    setProgress({ ...progress, ...p });
   };
 
   return loading ? (
@@ -75,7 +74,15 @@ export const UserProvider = ({ children }) => {
     </div>
   ) : user ? (
     <UserContext.Provider
-      value={{ user, setUser, progress, setProgress, getProgress, logOut }}
+      value={{
+        user,
+        setUser,
+        progress,
+        setProgress,
+        getProgress,
+        updateProgress,
+        logOut,
+      }}
     >
       {children}
     </UserContext.Provider>

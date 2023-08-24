@@ -12,6 +12,10 @@ import { getFirestore, doc, setDoc } from "firebase/firestore";
 import app from "../../services/firebase";
 import LoadingIndicator from "../../components/LoadingIndicator/LoadingIndicator";
 import { getError } from "../../helpers/error";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
+import { faG } from "@fortawesome/free-solid-svg-icons";
+
 const db = getFirestore();
 
 function LoginPage() {
@@ -51,7 +55,7 @@ function LoginPage() {
           displayName: username,
           email: user.email,
           photoURL: `https://placeholder-avatars.herokuapp.com/?name=${email}&type=pattern&color=4958f8&bg=cadcff`,
-          level: 1,
+          level: 0,
           checkpoint: 0,
           awpm: 0,
           aacc: 0,
@@ -81,10 +85,11 @@ function LoginPage() {
           email: user.email,
           photoURL: user.photoURL,
           // photoURL: `https://placeholder-avatars.herokuapp.com/?name=${email}&type=pattern&color=4958f8&bg=cadcff`,
-          level: 1,
+          level: 0,
           checkpoint: 0,
           awpm: 0,
           aacc: 0,
+          accessToken: token,
         });
       })
       .catch((error) => {
@@ -215,14 +220,20 @@ function LoginPage() {
                     : handleAccountCreation
                 }
               >
-                {activeAuthMethod === "login"
-                  ? "Log in with email/password"
-                  : "Sign up with email/password"}
+                <span>
+                  {activeAuthMethod === "login"
+                    ? "Log in with email/password"
+                    : "Sign up with email/password"}
+                </span>
+                <FontAwesomeIcon icon={faEnvelope} />
               </button>
               <button onClick={handleGoogleLogin}>
-                {activeAuthMethod === "login"
-                  ? "Log in with Google"
-                  : "Sign up with Google"}
+                <span>
+                  {activeAuthMethod === "login"
+                    ? "Log in with Google"
+                    : "Sign up with Google"}
+                </span>
+                <FontAwesomeIcon icon={faG} />
               </button>
             </div>
           </form>

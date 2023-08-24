@@ -12,7 +12,7 @@ exports.createUser = functions.auth.user().onCreate((user) => {
 
   userCollection.doc(uid).set({
     email: email,
-    level: 1,
+    level: 0,
     checkpoint: 0,
     awpm: 0,
     aacc: 0,

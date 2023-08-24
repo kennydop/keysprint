@@ -3,22 +3,53 @@ import { Link } from "react-router-dom";
 import ProgressIndicator from "../../components/ProgressIndicator/ProgressIndicator";
 import "./LaunchPage.css";
 import { useUser } from "../../contexts/UserContext";
+import ContinueIcon from "../../components/Icons/ContinueIcon";
 
 const levelTitle = {
   1: "Beginner",
-  2: "Intermediate",
-  3: "Advanced",
+  2: "Beginner",
+  3: "Beginner",
+  4: "Intermediate",
+  5: "Intermediate",
+  6: "Intermediate",
+  7: "Advanced",
+  8: "Advanced",
+  9: "Advanced",
+  10: "Expert",
 };
+
+const checkpointUrl = {
+  0.5: "tutorials",
+  1: "test",
+  1.5: "tutorial",
+  2: "test",
+  2.5: "tutorial",
+  3: "test",
+  3.5: "tutorial",
+  4: "test",
+  4.5: "tutorial",
+  5: "test",
+  5.5: "tutorial",
+  6: "test",
+  6.5: "tutorial",
+  7: "test",
+  7.5: "tutorial",
+  8: "test",
+  8.5: "tutorial",
+  9: "test",
+  9.5: "tutorial",
+  10: "test",
+};
+
 const LaunchPage = () => {
-  const { user, progress } = useUser();
-  console.log(progress);
+  const { user, progress, updateProgress } = useUser();
 
   return (
     <div className="main-content">
-      <ProgressIndicator value={0.6} />
+      <ProgressIndicator value={(progress.checkpoint - 0.5) / 10} />
       <div className="lpr_container">
         <div className="user-info">
-          <h2>{progress.displayName}</h2>
+          <h2>{user.displayName}</h2>
           <p>
             Level: <span className="lp_info">{levelTitle[progress.level]}</span>
           </p>
@@ -32,23 +63,13 @@ const LaunchPage = () => {
             Global Rank: <span className="lp_info">{progress.rank}</span>
           </p> */}
         </div>
-        <Link to="/menu" style={{ textDecoration: "none" }}>
+        <Link
+          to={`${checkpointUrl[progress.checkpoint]}`}
+          style={{ textDecoration: "none" }}
+        >
           <button className="continue-btn">
-            <span>Continue</span>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              id="arrow-right-alt"
-            >
-              <path fill="none" d="M0 0h24v24H0V0z"></path>
-              <path
-                d="M16.01 11H4v2h12.01v3L20 12l-3.99-4v3z"
-                fill="#ffffff"
-                className="color000 svgShape"
-              ></path>
-            </svg>
+            <span>{progress.checkpoint === 0.5 ? "Start" : "Continue"}</span>
+            <ContinueIcon />
           </button>
         </Link>
       </div>

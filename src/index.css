@@ -46,12 +46,24 @@ button {
   padding: 0 1rem;
   align-items: center;
   text-decoration: none;
+  justify-content: space-between;
 }
 
 button:active {
   background-color: #cadcff;
 }
 
+button > span {
+  text-decoration: none;
+}
+
 .error {
   color: red;
+}
+
+.bottomBtnContainer {
+  width: 100%;
+  display: flex;
+  justify-content: end;
+  align-items: center;
 }

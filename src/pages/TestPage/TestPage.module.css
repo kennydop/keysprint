@@ -1,0 +1,45 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.passageContainer {
+  position: relative;
+  flex: 1;
+  padding: 20px;
+}
+
+.backgroundPassage,
+.userInput {
+  font-size: 16px;
+  line-height: 1.5;
+  white-space: pre-wrap;
+}
+
+.userInput {
+  position: absolute;
+  top: 0;
+  left: 0;
+  color: transparent;
+}
+
+.correct {
+  color: green;
+}
+
+.incorrect {
+  color: red;
+}
+
+.hiddenTextarea {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  z-index: 2;
+  border: none;
+  outline: none;
+  resize: none;
+  background: transparent;
+}

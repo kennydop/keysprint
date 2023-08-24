@@ -5,7 +5,6 @@ import { Link } from "react-router-dom";
 
 function Header() {
   const { user, logOut } = useUser();
-  console.log(user);
   return (
     user && (
       <header className="header">
