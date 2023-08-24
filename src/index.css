@@ -3,6 +3,7 @@
 * {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
 }
 
 body {
@@ -55,6 +56,12 @@ button:active {
 
 button > span {
   text-decoration: none;
+}
+
+.reverse_btn_theme {
+  color: #4958f8;
+  background-color: white;
+  border: 1px solid #4958f8;
 }
 
 .error {

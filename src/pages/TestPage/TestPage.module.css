@@ -1,29 +1,43 @@
 .container {
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  width: 100%;
+}
+
+.testAreaContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.testStatsContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background-color: #4958f8;
+  color: white;
+  width: 100%;
+}
+
+.testStatsContainer span {
+  font-size: 16px;
+  font-weight: 600;
 }
 
 .passageContainer {
   position: relative;
   flex: 1;
-  padding: 20px;
+  width: 60%;
+  padding-top: 1rem;
+  overflow-wrap: break-word;
 }
 
-.backgroundPassage,
-.userInput {
-  font-size: 16px;
-  line-height: 1.5;
-  white-space: pre-wrap;
+.pending {
+  color: #494b5c7b;
 }
-
-.userInput {
-  position: absolute;
-  top: 0;
-  left: 0;
-  color: transparent;
-}
-
 .correct {
   color: green;
 }
@@ -32,14 +46,28 @@
   color: red;
 }
 
+.pending,
+.incorrect,
+.correct {
+  font-size: 32px;
+  font-weight: 600;
+}
+
+.hiddenTextareaContainer {
+  position: relative;
+}
+
 .hiddenTextarea {
   position: absolute;
   width: 100%;
   height: 100%;
-  opacity: 0;
+  opacity: 0.01; /* Made it slightly visible to show the caret */
   z-index: 2;
   border: none;
   outline: none;
   resize: none;
   background: transparent;
+  color: transparent; /* Make text invisible */
+  caret-color: black; /* Make caret visible */
+  font-size: 32px; /* Ensure font size matches the displayed passage */
 }

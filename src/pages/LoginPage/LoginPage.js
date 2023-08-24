@@ -55,10 +55,11 @@ function LoginPage() {
           displayName: username,
           email: user.email,
           photoURL: `https://placeholder-avatars.herokuapp.com/?name=${email}&type=pattern&color=4958f8&bg=cadcff`,
-          level: 0,
-          checkpoint: 0,
+          level: 1,
+          checkpoint: 0.5,
           awpm: 0,
           aacc: 0,
+          tests_completed: 0,
         });
       })
       .catch((error) => {
@@ -85,11 +86,12 @@ function LoginPage() {
           email: user.email,
           photoURL: user.photoURL,
           // photoURL: `https://placeholder-avatars.herokuapp.com/?name=${email}&type=pattern&color=4958f8&bg=cadcff`,
-          level: 0,
-          checkpoint: 0,
+          level: 1,
+          checkpoint: 0.5,
           awpm: 0,
           aacc: 0,
           accessToken: token,
+          tests_completed: 0,
         });
       })
       .catch((error) => {
