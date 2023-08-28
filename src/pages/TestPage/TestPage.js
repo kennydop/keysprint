@@ -1,11 +1,12 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useUser } from "../../contexts/UserContext";
 import styles from "./TestPage.module.css";
 import LevelCompleteModal from "../../components/Modals/LevelCompleteModal";
+import { useNavigate } from "react-router-dom";
 
 const generatePassage = (level) => {
   const passages = {
-    1: "asdfjkl; aaa sss ddd fff jjj kkk lll ;;; ak df s k d sd lkj ; dkjh sdjdk",
+    1: "asdf jkl; aaa sss ddd fff jjj kkk lll ;;; ak df s k d sd lkj ; dkjh sdjdk",
     2: "The cat sat on the mat.",
     3: "Rain rain go away, come again another day.",
     // ... more passages for different levels
@@ -30,6 +31,8 @@ const TestPage = () => {
   const [timeElapsed, setTimeElapsed] = useState(0);
   const [timerInterval, setTimerInterval] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const textareaRef = useRef(null);
+  const navigate = useNavigate();
 
   const calculateWPM = (input) => {
     if (!startTime) return;
@@ -65,7 +68,7 @@ const TestPage = () => {
     const correctChars = currentInput
       .split("")
       .filter((char, index) => char === passage[index]).length;
-    const accuracy = (correctChars / passage.length) * 100;
+    const accuracy = (correctChars / (currentInput.length || 1)) * 100;
     setAccuracy(accuracy);
 
     if (currentInput.length === passage.length) {
@@ -88,6 +91,10 @@ const TestPage = () => {
 
   const closeModal = () => {
     setIsModalOpen(false);
+  };
+
+  const retake = () => {
+    navigate(0);
   };
 
   useEffect(() => {
@@ -137,6 +144,7 @@ const TestPage = () => {
           </div>
           <div className={styles.hiddenTextareaContainer}>
             <textarea
+              ref={textareaRef}
               className={styles.hiddenTextarea}
               value={userInput}
               onChange={handleInputChange}
@@ -167,13 +175,21 @@ const TestPage = () => {
           </div>
         </div>
       )}
+
       <LevelCompleteModal
         isOpen={isModalOpen}
         onClose={closeModal}
         wpm={wpm}
-        awpm={progress.awpm + wpm / (progress.awpm === 0 ? 1 : 2)}
+        awpm={
+          (progress.accumulated_wpms + wpm) / (progress.tests_completed + 1)
+        }
         accuracy={accuracy}
+        average_accuracy={
+          (progress.accumulated_accuracies + accuracy) /
+          (progress.tests_completed + 1)
+        }
         time={formatTime(timeElapsed)}
+        retake={retake}
       />
     </div>
   );

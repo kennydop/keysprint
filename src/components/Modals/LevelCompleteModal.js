@@ -2,8 +2,11 @@ import confetti from "../../assets/images/confetti.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faRotateRight, faXmark } from "@fortawesome/free-solid-svg-icons";
 import styles from "./LevelCompleteModal.module.css";
-import { Link } from "react-router-dom";
 import ContinueIcon from "../Icons/ContinueIcon";
+import { useUser } from "../../contexts/UserContext";
+import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+import LoadingIndicator from "../LoadingIndicator/LoadingIndicator";
 
 const LevelCompleteModal = ({
   isOpen,
@@ -13,7 +16,11 @@ const LevelCompleteModal = ({
   accuracy,
   average_accuracy,
   time,
+  retake,
 }) => {
+  const { user, progress, updateProgress } = useUser();
+  const navigate = useNavigate();
+  const [loading, setLoading] = useState();
   if (!isOpen) return null;
 
   return (
@@ -21,12 +28,12 @@ const LevelCompleteModal = ({
       <div className={styles.modal}>
         <div className={styles.modalTitleBar}>
           <h2>Test Completed!</h2>
-          <FontAwesomeIcon
+          {/* <FontAwesomeIcon
             icon={faXmark}
             onClick={onClose}
             color="red"
             cursor={"pointer"}
-          />
+          /> */}
         </div>
         <div className={styles.imgContainer}>
           <img src={confetti} alt="Confetti" width={150} height={150} />
@@ -38,7 +45,7 @@ const LevelCompleteModal = ({
         </div>
         <div className={styles.modalInfoRow}>
           <span>Average Words Per Minute (AWPM):</span>
-          <span className={styles.infoValue}>{awpm}</span>
+          <span className={styles.infoValue}>{Math.round(awpm)}</span>
         </div>
         <div className={styles.modalInfoRow}>
           <span>Accuracy:</span>
@@ -55,18 +62,45 @@ const LevelCompleteModal = ({
           <span className={styles.infoValue}>{time}</span>
         </div>
         {/* </div> */}
-        <div className={styles.btnsContainer}>
-          {/* <Link to="/test"> */}
-          <button className="reverse_btn_theme">
-            <span>Retake</span>
-            <FontAwesomeIcon icon={faRotateRight} color="4958f8" />
-          </button>
-          {/* </Link> */}
-          <button onClick={onClose}>
-            <span>Continue</span>
-            <ContinueIcon />
-          </button>
-        </div>
+        {loading ? (
+          <LoadingIndicator />
+        ) : (
+          <div className={styles.btnsContainer}>
+            <button
+              className="reverse_btn_theme"
+              onClick={() => {
+                if (loading) return;
+                setLoading(true);
+                retake();
+                setLoading(false);
+              }}
+            >
+              <span>Retake</span>
+              <FontAwesomeIcon icon={faRotateRight} color="4958f8" />
+            </button>
+            <button
+              onClick={async () => {
+                if (loading) return;
+                setLoading(true);
+                await updateProgress(user, {
+                  checkpoint: progress.checkpoint + 0.5,
+                  level: progress.level + 1,
+                  tests_completed: progress.tests_completed + 1,
+                  accumulated_accuracies:
+                    progress.accumulated_accuracies + accuracy,
+                  accumulated_wpms: progress.accumulated_wpms + wpm,
+                  aacc: average_accuracy,
+                  awpm: awpm,
+                });
+                navigate("/tutorial");
+                setLoading(false);
+              }}
+            >
+              <span>Continue</span>
+              <ContinueIcon />
+            </button>
+          </div>
+        )}
       </div>
     </div>
   );

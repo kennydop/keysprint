@@ -19,7 +19,7 @@ const levelTitle = {
 };
 
 const checkpointUrl = {
-  0.5: "tutorials",
+  0.5: "tutorial",
   1: "test",
   1.5: "tutorial",
   2: "test",
@@ -54,10 +54,11 @@ const LaunchPage = () => {
             Level: <span className="lp_info">{levelTitle[progress.level]}</span>
           </p>
           <p>
-            Average Accuracy: <span className="lp_info">{progress.aacc}</span>
+            Average Accuracy:{" "}
+            <span className="lp_info">{Math.round(progress.aacc)}</span>
           </p>
           <p>
-            AWPM: <span className="lp_info">{progress.awpm}</span>
+            AWPM: <span className="lp_info">{Math.round(progress.awpm)}</span>
           </p>
           {/* <p>
             Global Rank: <span className="lp_info">{progress.rank}</span>

@@ -58,7 +58,9 @@ function LoginPage() {
           level: 1,
           checkpoint: 0.5,
           awpm: 0,
+          accumulated_wpms: 0,
           aacc: 0,
+          accumulated_accuracies: 0,
           tests_completed: 0,
         });
       })
@@ -89,7 +91,9 @@ function LoginPage() {
           level: 1,
           checkpoint: 0.5,
           awpm: 0,
+          accumulated_wpms: 0,
           aacc: 0,
+          accumulated_accuracies: 0,
           accessToken: token,
           tests_completed: 0,
         });
