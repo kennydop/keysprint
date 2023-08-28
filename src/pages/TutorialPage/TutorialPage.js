@@ -44,10 +44,10 @@ const TutorialPage = () => {
   useEffect(() => {
     setButtonEnabled(false);
 
-    // Enable the button after 260 seconds
+    // Enable the button after 160 seconds
     const timeoutId = setTimeout(() => {
       setButtonEnabled(true);
-    }, 5 * 1000);
+    }, 160 * 1000);
 
     return () => {
       clearTimeout(timeoutId);

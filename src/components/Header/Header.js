@@ -2,6 +2,8 @@ import React from "react";
 import "./Header.css";
 import { useUser } from "../../contexts/UserContext";
 import { Link } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSignOut } from "@fortawesome/free-solid-svg-icons";
 
 function Header() {
   const { user, logOut } = useUser();
@@ -13,14 +15,16 @@ function Header() {
         </Link>
         <div className="profile">
           <span className="user-name">{user?.displayName}</span>
-          <img
+          <img className="avatar" src={user?.photoURL} alt="User avatar" />
+          <div
+            className="logout"
             onClick={() => {
               logOut();
             }}
-            className="avatar"
-            src={user?.photoURL}
-            alt="User avatar"
-          />
+          >
+            <p> Logout</p>
+            <FontAwesomeIcon icon={faSignOut} />
+          </div>
         </div>
       </header>
     )

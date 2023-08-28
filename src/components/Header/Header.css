@@ -21,10 +21,10 @@
 .profile {
   display: flex;
   align-items: center;
+  gap: 0.5rem;
 }
 
 .user-name {
-  margin-right: 1rem;
   font-weight: 500;
 }
 
@@ -32,5 +32,15 @@
   height: 40px;
   width: 40px;
   border-radius: 50%;
+  cursor: pointer;
+}
+
+.logout {
+  margin-left: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  color: red;
   cursor: pointer;
 }

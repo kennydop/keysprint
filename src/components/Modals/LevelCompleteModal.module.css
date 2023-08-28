@@ -35,14 +35,6 @@
   margin: 1rem 0;
 }
 
-.infoContainer {
-  /* display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  margin-bottom: 1rem; */
-}
-
 .modalInfoRow {
   display: flex;
   justify-content: space-between;

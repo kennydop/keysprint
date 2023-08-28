@@ -23,7 +23,6 @@ function App() {
             <Route index path="" element={<LaunchPage />} />
             <Route exact path="tutorial" element={<TutorialPage />} />
             <Route exact path="test" element={<TestPage />} />
-            {/* -------------------------------------------------------- */}
           </Route>
         </Routes>
       </div>

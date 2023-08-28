@@ -1,6 +1,6 @@
 import confetti from "../../assets/images/confetti.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faRotateRight, faXmark } from "@fortawesome/free-solid-svg-icons";
+import { faRotateRight } from "@fortawesome/free-solid-svg-icons";
 import styles from "./LevelCompleteModal.module.css";
 import ContinueIcon from "../Icons/ContinueIcon";
 import { useUser } from "../../contexts/UserContext";
