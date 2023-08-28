@@ -16,6 +16,8 @@ const LevelCompleteModal = ({
   accuracy,
   average_accuracy,
   time,
+  passed,
+  passingWPM,
   retake,
 }) => {
   const { user, progress, updateProgress } = useUser();
@@ -27,17 +29,25 @@ const LevelCompleteModal = ({
     <div className={styles.modalOverlay}>
       <div className={styles.modal}>
         <div className={styles.modalTitleBar}>
-          <h2>Test Completed!</h2>
-          {/* <FontAwesomeIcon
-            icon={faXmark}
-            onClick={onClose}
-            color="red"
-            cursor={"pointer"}
-          /> */}
+          {passed ? (
+            <h2>Test Completed!</h2>
+          ) : (
+            <>
+              <h2>Test Failed!</h2>
+
+              <p style={{ color: "red", margin: "15px 0px" }}>
+                You need to score a <b>WPM</b> of not less than{" "}
+                <b>{passingWPM}</b> and an <b>accuracy</b> of not less than{" "}
+                <b>80%</b> to pass this test.
+              </p>
+            </>
+          )}
         </div>
-        <div className={styles.imgContainer}>
-          <img src={confetti} alt="Confetti" width={150} height={150} />
-        </div>
+        {passed && (
+          <div className={styles.imgContainer}>
+            <img src={confetti} alt="Confetti" width={150} height={150} />
+          </div>
+        )}
         {/* <div className={styles.infoContainer}> */}
         <div className={styles.modalInfoRow}>
           <span>Words Per Minute (WPM):</span>
@@ -78,27 +88,29 @@ const LevelCompleteModal = ({
               <span>Retake</span>
               <FontAwesomeIcon icon={faRotateRight} color="4958f8" />
             </button>
-            <button
-              onClick={async () => {
-                if (loading) return;
-                setLoading(true);
-                await updateProgress(user, {
-                  checkpoint: progress.checkpoint + 0.5,
-                  level: progress.level + 1,
-                  tests_completed: progress.tests_completed + 1,
-                  accumulated_accuracies:
-                    progress.accumulated_accuracies + accuracy,
-                  accumulated_wpms: progress.accumulated_wpms + wpm,
-                  aacc: average_accuracy,
-                  awpm: awpm,
-                });
-                navigate("/tutorial");
-                setLoading(false);
-              }}
-            >
-              <span>Continue</span>
-              <ContinueIcon />
-            </button>
+            {passed && (
+              <button
+                onClick={async () => {
+                  if (loading) return;
+                  setLoading(true);
+                  await updateProgress(user, {
+                    checkpoint: progress.checkpoint + 0.5,
+                    level: progress.level + 1,
+                    tests_completed: progress.tests_completed + 1,
+                    accumulated_accuracies:
+                      progress.accumulated_accuracies + accuracy,
+                    accumulated_wpms: progress.accumulated_wpms + wpm,
+                    aacc: average_accuracy,
+                    awpm: awpm,
+                  });
+                  navigate("/tutorial");
+                  setLoading(false);
+                }}
+              >
+                <span>Continue</span>
+                <ContinueIcon />
+              </button>
+            )}
           </div>
         )}
       </div>

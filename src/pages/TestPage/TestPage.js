@@ -11,6 +11,19 @@ const formatTime = (seconds) => {
   return `${String(mins).padStart(2, "0")}:${String(secs).padStart(2, "0")}`;
 };
 
+const minAWPMs = {
+  1: 0,
+  2: 5,
+  3: 10,
+  4: 15,
+  5: 20,
+  6: 25,
+  7: 30,
+  8: 35,
+  9: 42,
+  10: 47,
+};
+
 const TestPage = () => {
   const { progress } = useUser();
   const [passage, setPassage] = useState("");
@@ -180,6 +193,8 @@ const TestPage = () => {
           (progress.tests_completed + 1)
         }
         time={formatTime(timeElapsed)}
+        passed={wpm >= minAWPMs[progress.level] && accuracy >= 80}
+        passingWPM={minAWPMs[progress.level]}
         retake={retake}
       />
     </div>

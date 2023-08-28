@@ -26,7 +26,7 @@ const levelToLetters = {
     "l",
     ";",
   ],
-  7: ["z", "x", "c", "v", "b", "n", "m"],
+  7: ["z", "x", "c", "v", "b", "n", "m", ",", ".", "/"],
   8: [
     "z",
     "x",
@@ -35,6 +35,9 @@ const levelToLetters = {
     "b",
     "n",
     "m",
+    ",",
+    ".",
+    "/",
     "q",
     "w",
     "e",
@@ -62,6 +65,9 @@ const levelToLetters = {
     "b",
     "n",
     "m",
+    ",",
+    ".",
+    "/",
     "q",
     "w",
     "e",
@@ -110,7 +116,7 @@ const levelToLetters = {
   ],
 };
 
-function generatePassageFromLetters(level, length = 100) {
+function generatePassageFromLetters(level, length = 120) {
   const letters = levelToLetters[level];
   let passage = "";
   let word = "";

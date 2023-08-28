@@ -42,7 +42,7 @@ const checkpointUrl = {
 };
 
 const LaunchPage = () => {
-  const { user, progress, updateProgress } = useUser();
+  const { user, progress } = useUser();
 
   return (
     <div className="main-content">
@@ -51,7 +51,10 @@ const LaunchPage = () => {
         <div className="user-info">
           <h2>{user.displayName}</h2>
           <p>
-            Level: <span className="lp_info">{levelTitle[progress.level]}</span>
+            Level:{" "}
+            <span className="lp_info">
+              {levelTitle[progress.level > 10 ? 10 : progress.level]}
+            </span>
           </p>
           <p>
             Average Accuracy:{" "}
@@ -65,7 +68,9 @@ const LaunchPage = () => {
           </p> */}
         </div>
         <Link
-          to={`${checkpointUrl[progress.checkpoint]}`}
+          to={`${
+            checkpointUrl[progress.checkpoint > 10 ? 10 : progress.checkpoint]
+          }`}
           style={{ textDecoration: "none" }}
         >
           <button className="continue-btn">
