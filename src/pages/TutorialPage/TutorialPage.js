@@ -64,7 +64,13 @@ const TutorialPage = () => {
             title="keysprint-videos"
             width="640"
             height="360"
-            src={levelVideo[progress.checkpoint]}
+            src={
+              levelVideo[
+                progress.checkpoint % 1 === 0
+                  ? progress.checkpoint - 0.5
+                  : progress.checkpoint
+              ]
+            }
             frameBorder="0"
             allowFullScreen
           />

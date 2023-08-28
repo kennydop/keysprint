@@ -3,16 +3,7 @@ import { useUser } from "../../contexts/UserContext";
 import styles from "./TestPage.module.css";
 import LevelCompleteModal from "../../components/Modals/LevelCompleteModal";
 import { useNavigate } from "react-router-dom";
-
-const generatePassage = (level) => {
-  const passages = {
-    1: "asdf jkl; aaa sss ddd fff jjj kkk lll ;;; ak df s k d sd lkj ; dkjh sdjdk",
-    2: "The cat sat on the mat.",
-    3: "Rain rain go away, come again another day.",
-    // ... more passages for different levels
-  };
-  return passages[level];
-};
+import { generatePassage } from "../../helpers/generator";
 
 const formatTime = (seconds) => {
   const mins = Math.floor(seconds / 60);
